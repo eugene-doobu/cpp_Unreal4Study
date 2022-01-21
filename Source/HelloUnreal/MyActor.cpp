@@ -22,6 +22,9 @@ void AMyActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	// 카테고리, 로깅 수준, 형식, 인자
+	// 수준에 따라 로그의 색상도 바꿀 수 있음
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay %d"), 3);
 }
 
 // Called every frame
@@ -29,5 +32,9 @@ void AMyActor::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// 매 프레임 로그를 찍는것은 실행파일을 남기기 때문에 좋지 못함
+	//UE_LOG(LogTemp, Error, TEXT("Tick %f"), DeltaTime);
+
+	AddActorLocalRotation(FRotator(0.f, RotateSpeed * DeltaTime, 0.f));
 }
 
