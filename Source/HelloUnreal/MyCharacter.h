@@ -47,4 +47,14 @@ private:
 	//많이 쓸거면 굳이 스택에다 만들지 않고 멤버변수로
 	UPROPERTY()
 	class UMyAnimInstance* AnimInstance;
+
+	UPROPERTY()
+	int32 AttackIndex = 0;
+
+public:
+	UPROPERTY()
+	float UpDownValue = 0;
+
+	UPROPERTY()
+	float LeftRightValue = 0;
 };
