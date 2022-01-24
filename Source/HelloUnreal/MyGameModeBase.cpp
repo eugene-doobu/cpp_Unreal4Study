@@ -5,13 +5,11 @@
 #include "MyCharacter.h"
 
 AMyGameModeBase::AMyGameModeBase() {
-	DefaultPawnClass = AMyCharacter::StaticClass();
+	//DefaultPawnClass = AMyCharacter::StaticClass();
 	
-	/*
-	static ConstructorHelpers::FClassFinder<ACharacter>BP_Char(TEXT("Blueprint'/Game/Blueprints/BP_MyCharacter.BP_MyCharacter_C'"));
+	static ConstructorHelpers::FClassFinder<ACharacter>BP_Char(TEXT("Blueprint'/Game/Blueprints/BP_MyCharacter2.BP_MyCharacter2_C'"));
 
 	if (BP_Char.Succeeded()) {
 		DefaultPawnClass = BP_Char.Class;
 	}
-	*/
 }
