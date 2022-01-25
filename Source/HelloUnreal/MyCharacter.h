@@ -7,9 +7,9 @@
 #include "MyCharacter.generated.h"
 
 UCLASS()
-class HELLOUNREAL_API AMyCharacter : public ACharacter
+class HELLOUNREAL_API AMyCharacter : public ACharacter 
 {
-	GENERATED_BODY()
+	 GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
@@ -18,6 +18,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+	virtual void PostInitializeComponents() override;
 
 public:	
 	// Called every frame
@@ -26,10 +27,12 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void Attack();
+	void AttackCheck();
+
 	void UpDown(float Value);
 	void LeftRight(float value);
 	void Yaw(float value);
-	void Attack();
 
 	UFUNCTION()
 	void OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted);

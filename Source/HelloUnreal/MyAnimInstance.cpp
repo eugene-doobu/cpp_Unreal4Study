@@ -49,4 +49,5 @@ FName UMyAnimInstance::GetAttackMontageName(int32 SectionIndex)
 
 void UMyAnimInstance::AnimNotify_AttackHit()
 {
+	OnAttackHit.Broadcast();
 }
