@@ -55,9 +55,9 @@ void AMyCharacter::BeginPlay()
 	auto CurrentWeapon = GetWorld()->SpawnActor<AMyWeapon>(FVector::ZeroVector, FRotator::ZeroRotator);
 
 	if (CurrentWeapon) {
-		CurrentWeapon->AttachToComponent(GetMesh(),
+		/*CurrentWeapon->AttachToComponent(GetMesh(),
 			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
-			WeaponSocket);
+			WeaponSocket);*/
 	}
 }
 
