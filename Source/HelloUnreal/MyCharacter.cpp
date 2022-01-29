@@ -132,6 +132,9 @@ void AMyCharacter::AttackCheck()
 
 	if (bResult && HitResult.Actor.IsValid()) {
 		UE_LOG(LogTemp, Log, TEXT("Hit Actor : %s"), *HitResult.Actor->GetName());
+
+		// 공격은 일반적으로 피해자쪽에서 처리하는게 훨씬 깔끔
+		//HitResult.Actor->TakeDamage()
 	}
 }
 
