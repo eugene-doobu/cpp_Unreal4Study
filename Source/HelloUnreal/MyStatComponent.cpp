@@ -39,16 +39,27 @@ void UMyStatComponent::SetLevel(int32 NewLevel)
 	auto MyGameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (MyGameInstance) {
 		auto StatData = MyGameInstance->GetStatData(NewLevel);
-		Level = StatData->Level;
-		Hp = StatData->MaxHP;
-		Attack = StatData->Attack;
+		if (StatData) {
+			Level = StatData->Level;
+			SetHp(StatData->MaxHP);
+			MaxHp = StatData->MaxHP;
+			Attack = StatData->Attack;
+		}
 	}
+}
+
+void UMyStatComponent::SetHp(int32 NewHp)
+{
+	Hp = NewHp;
+	if (Hp < 0) Hp = 0;
+
+	OnHpChanged.Broadcast();
 }
 
 void UMyStatComponent::OnAttacked(float DamegaAmount)
 {
-	Hp -= DamegaAmount;
-	if (Hp < 0) Hp = 0;
+	int32 NewHp = Hp - DamegaAmount;
+	SetHp(NewHp);
 
-	UE_LOG(LogTemp, Warning, TEXT("OnAttacked %d"), Hp);
+	// UE_LOG(LogTemp, Warning, TEXT("OnAttacked %d"), Hp);
 }
