@@ -13,10 +13,10 @@ UMyGameInstance::UMyGameInstance()
 void UMyGameInstance::Init()
 {
 	Super::Init();
-	UE_LOG(LogTemp, Warning, TEXT("MyGameInstance %d"), GeteStatData(1)->Attack);
+	UE_LOG(LogTemp, Warning, TEXT("MyGameInstance %d"), GetStatData(1)->Attack);
 }
 
-FMyCharaterData* UMyGameInstance::GeteStatData(int32 Level)
+FMyCharaterData* UMyGameInstance::GetStatData(int32 Level)
 {
 	return MyStats->FindRow<FMyCharaterData>(*FString::FromInt(Level), TEXT(""));
 }

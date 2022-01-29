@@ -33,7 +33,7 @@ public:
 
 	virtual void Init() override;
 
-	FMyCharaterData* GeteStatData(int32 Level);
+	FMyCharaterData* GetStatData(int32 Level);
 
 private:
 	UPROPERTY()

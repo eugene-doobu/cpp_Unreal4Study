@@ -8,6 +8,7 @@
 #include "MyAnimInstance.h"
 #include "DrawDebugHelpers.h"
 #include "MyWeapon.h"
+#include "MyStatComponent.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -36,16 +37,7 @@ AMyCharacter::AMyCharacter()
 		GetMesh()->SetSkeletalMesh(SM.Object);
 	}
 
-	/*FName WeaponSocket(TEXT("hand_l_socket"));
-	if (GetMesh()->DoesSocketExist(WeaponSocket)) {
-		Weapon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WEAPON"));
-		static ConstructorHelpers::FObjectFinder<UStaticMesh> SW(TEXT("StaticMesh'/Game/ParagonGreystone/FX/Meshes/Heroes/Greystone/SM_Greystone_Blade_01.SM_Greystone_Blade_01'"));
-		if (SW.Succeeded()) {
-			Weapon->SetStaticMesh(SW.Object);
-		}
-
-		Weapon->SetupAttachment(GetMesh(), WeaponSocket);
-	}*/
+	Stat = CreateDefaultSubobject<UMyStatComponent>(TEXT("STAT"));
 }
 
 void AMyCharacter::BeginPlay()
@@ -91,6 +83,12 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 	PlayerInputComponent->BindAxis(TEXT("Yaw"), this, &AMyCharacter::Yaw);
 }
 
+float AMyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Stat->OnAttacked(DamageAmount);
+	return DamageAmount;
+}
+
 void AMyCharacter::Attack() {
 	if (isAttacking) return;
 
@@ -134,7 +132,8 @@ void AMyCharacter::AttackCheck()
 		UE_LOG(LogTemp, Log, TEXT("Hit Actor : %s"), *HitResult.Actor->GetName());
 
 		// 공격은 일반적으로 피해자쪽에서 처리하는게 훨씬 깔끔
-		//HitResult.Actor->TakeDamage()
+		FDamageEvent DamageEvent;
+		HitResult.Actor->TakeDamage(Stat->GetAttack(), DamageEvent, GetController(), this);
 	}
 }
 
