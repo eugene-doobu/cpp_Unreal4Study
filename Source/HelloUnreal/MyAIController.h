@@ -18,7 +18,14 @@ public:
 
 	virtual void OnPossess(APawn* InPawn) override;
 	virtual void OnUnPossess() override;
+
 private:
 	void RandomMove();
 	FTimerHandle TimerHandle;
+
+	UPROPERTY()
+	class UBehaviorTree* BehaviorTree;
+
+	UPROPERTY()
+	class UBlackboardData* BlackboardData;
 };

@@ -109,6 +109,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 float AMyCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
+	Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+
 	Stat->OnAttacked(DamageAmount);
 	return DamageAmount;
 }
@@ -185,4 +187,5 @@ void AMyCharacter::Yaw(float Value) {
 void AMyCharacter::OnAttackMontageEnded(UAnimMontage* Montage, bool bInterrupted)
 {
 	isAttacking = false;
+	OnAttackEnd.Broadcast();
 }
